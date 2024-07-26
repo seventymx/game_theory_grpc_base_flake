@@ -74,11 +74,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1722008883,
-        "narHash": "sha256-8xSdkv0PoLUWLe3DX0I9jnlB7MQMR372BG85n71UYxw=",
+        "lastModified": 1722025121,
+        "narHash": "sha256-lisW5q8OdjrByYCjzLUiMizZgmCqcuon3SK9MfMpjuY=",
         "owner": "seventymx",
         "repo": "game_theory_grpc_protos",
-        "rev": "c718eb4107d5a1aeab537e325717392d646b8a37",
+        "rev": "ae8253ff633d2046bd962984cbdb7a7cb8f1f029",
         "type": "github"
       },
       "original": {
