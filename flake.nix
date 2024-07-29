@@ -50,6 +50,7 @@
             unstable.nixfmt-rfc-style
             unstable.git
             unstable.powershell
+            unstable.gnutar
           ];
 
           shellHook = ''
