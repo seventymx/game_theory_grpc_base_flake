@@ -62,14 +62,15 @@
         '';
       in
       {
-        inherit majorMinorVersion protos;
+        inherit majorMinorVersion protos powershell_modules;
 
         devShell = unstable.mkShell {
           buildInputs = [
             unstable.nixfmt-rfc-style
             unstable.git
             unstable.powershell
-            unstable.gnutar
+            unstable.which
+            unstable.rsync
           ];
 
           shellHook = ''

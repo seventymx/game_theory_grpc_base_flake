@@ -8,6 +8,8 @@
 # Contributors:
 # - Contributor Name <contributor@example.com>
 
+$ErrorActionPreference = "Stop"
+
 $successMessageFormat = "Successfully generated {0} gRPC files in the '{1}' directory."
 $defaultGeneratedDirectory = "generated"
 
