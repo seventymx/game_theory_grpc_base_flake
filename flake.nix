@@ -43,6 +43,12 @@
             "password": "fancyspy10"
           }
         '';
+
+        # Derivation for the powershell_modules directory
+        powershell_modules = unstable.runCommand "powershell_modules" { } ''
+          mkdir -p $out
+          cp -r ${./powershell_modules}/* $out/
+        '';
       in
       {
         devShell = unstable.mkShell {
@@ -66,8 +72,12 @@
 
             export CERTIFICATE_SETTINGS='${certificateSettings}'
 
+            export PSModulePath="${powershell_modules}"
+
             # Enter PowerShell and output the licenseHeader
             pwsh -NoExit -Command "& {
+              Import-Module GrpcGenerator
+
               Write-Host ${licenseHeader}
             }"
 
