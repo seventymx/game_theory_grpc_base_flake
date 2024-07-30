@@ -25,6 +25,8 @@
       let
         unstable = import inputs.nixpkgs { inherit system; };
 
+        majorMinorVersion = "0.1";
+
         licenseHeader = ''
           @'
           ===================================================================
@@ -60,6 +62,8 @@
         '';
       in
       {
+        inherit majorMinorVersion protos;
+
         devShell = unstable.mkShell {
           buildInputs = [
             unstable.nixfmt-rfc-style
