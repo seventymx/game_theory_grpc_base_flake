@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "Seventy.GameTheory.PlayingField";
+option php_namespace = "PlayingField";
+
+package playing_field;
+
+import "google/protobuf/empty.proto";
+import "model.proto";
+
+service PlayingField {
+    rpc Subscribe (StrategyInfo) returns (google.protobuf.Empty);
+    rpc GetSubscribedStrategies (google.protobuf.Empty) returns (stream StrategyInfo);
+    rpc RunMatch (RunMatchRequest) returns (stream RoundResult);
+}
+
+message StrategyInfo {
+    string name = 1;
+    string address = 2;
+}
+
+message RunMatchRequest {
+    string strategy_a = 1;
+    string strategy_b = 2;
+    int32 rounds = 3;
+}
+
+message RoundResult {
+    string strategy_a = 1;
+    string strategy_b = 2;
+    model.PlayerAction answer_a = 3;
+    model.PlayerAction answer_b = 4;
+    int32 round_number = 5;
+}

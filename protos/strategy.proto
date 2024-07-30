@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Seventy.GameTheory.Strategy";
+
+package strategy;
+
+import "model.proto";
+
+service Strategy {
+    rpc HandleRequest (HandleRequestRequest) returns (HandleRequestResponse);
+}
+
+message HandleRequestRequest {
+    model.OpponentAction opponent_action = 1;
+}
+
+message HandleRequestResponse {
+    model.PlayerAction player_action = 1;
+}

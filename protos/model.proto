@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Seventy.GameTheory.Model";
+
+package model;
+
+enum OpponentAction {
+    NONE = 0;
+    COOPERATED = 1;
+    DEFECTED = 2;
+}
+
+enum PlayerAction {
+    COOPERATE = 0;
+    DEFECT = 1;
+}

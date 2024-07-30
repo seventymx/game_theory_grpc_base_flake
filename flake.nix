@@ -16,7 +16,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    protos.url = "github:seventymx/game_theory_grpc_protos";
   };
 
   outputs =
@@ -36,18 +35,28 @@
           '@
         '';
 
+        # Helper function to create derivations for directories
+        dirToDerivation =
+          path:
+          let
+            dirName = builtins.baseNameOf path;
+          in
+          unstable.runCommand dirName { } ''
+            mkdir -p $out
+            cp -r ${path}/* $out/
+          '';
+
+        # Use the helper function to create derivations
+        cert = dirToDerivation ./cert;
+        protos = dirToDerivation ./protos;
+        powershell_modules = dirToDerivation ./powershell_modules;
+
         # certificateSettings is a JSON string that contains the path to the certificate (without the extension) and the password for the pfx file.
         certificateSettings = ''
           {
-            "path": "../cert/localhost",
+            "path": "${cert}/localhost",
             "password": "fancyspy10"
           }
-        '';
-
-        # Derivation for the powershell_modules directory
-        powershell_modules = unstable.runCommand "powershell_modules" { } ''
-          mkdir -p $out
-          cp -r ${./powershell_modules}/* $out/
         '';
       in
       {
@@ -63,7 +72,7 @@
             # Set the shell to PowerShell - vscode will use this shell
             export SHELL="${unstable.powershell}/bin/pwsh"
 
-            export PROTOBUF_PATH=${inputs.protos}
+            export PROTOBUF_PATH=${protos}
 
             export PHP_INTERFACE_PORT=5001
             export PLAYING_FIELD_PORT=5002
